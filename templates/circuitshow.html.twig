@@ -1,0 +1,66 @@
+{# templates/circuitshow.html.twig #}
+{#
+  {{ dump(circuit) }}
+#}
+<!DOCTYPE html>
+<html>
+<head>
+{% block stylesheets %}
+            <!-- Bootstrap -->
+            {# <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> #}
+            <link rel="stylesheet" href="/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+            <!-- Optional theme -->
+            {# <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> #}
+            <link rel="stylesheet" href="/vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css">
+             <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/darkly/bootstrap.min.css" rel="stylesheet">
+            <link href="/css/styles.css" rel="stylesheet">
+            {% block custompage_style %}<style></style>{% endblock %}
+        {% endblock %} {# stylesheets #}
+
+
+  <title>Details for circuit {{ id }}</title>
+</head>
+<body>
+  <h1>{{ circuit.description }}</h1>
+<img src="{{ circuit.pathImage }}">
+	<h2>Détails</h2>
+
+			<p>Description: {{ circuit.description }}</p>
+
+			<p>Départ de {{ circuit.villeDepart }} pour {{ circuit.dureeCircuit }} j.
+         de voyage à travers le {{ circuit.paysDepart }}, pour terminer à
+         {{ circuit.villeArrivee }}.</p>
+  <p>Les étapes seront:
+	  <ul>
+        {%  for etapes in circuit.etapes %}
+
+                <li>{{etapes.villeEtape}} pendant {{ etapes.nombreJours }} jours</li>
+
+        {% endfor %}
+  </ul>
+  </p>
+  {% if circuit.programmations is not empty %}
+  <h2>Programmations de ce circuit</h2>
+  {# <pre>{{ dump(circuit) }}</pre> #}
+     	<table>
+     	 		<thead>
+     					<tr>
+     				    	<th>Date de départ</th>
+     						  <th>Nombre de personnes</th>
+     						  <th>Prix</th>
+     					</tr>
+     				</thead>
+     		{%  for programmation in circuit.programmations %}
+     			<tr>
+     			   <td>{{ programmation.dateDepart|date('d-m-Y')  }}</td>
+     			   <td>{{ programmation.nombrePersonnes }}</td>
+     			   <td>{{ programmation.prix }} euros</td>
+     			</tr>
+     		{% endfor %}
+     		</table>
+    {% else %}
+    <p>Désolé : pas encore de programmations pour ce circuit.</p>
+    {% endif %}
+
+</body>
+</html>
