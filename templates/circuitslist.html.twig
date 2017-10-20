@@ -12,7 +12,7 @@
         {# Loop through list and creeate the list of circuit items. #}
         {% for circuit in circuitslist %}
             <li>
-          		<a href="{{ path('circuitshow', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
+                <a href="{{ path('circuitshowuser', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
             </li>
         {% endfor %}
         </ul>

@@ -39,8 +39,10 @@
         {% endfor %}
   </ul>
   </p>
+
   {% if circuit.programmations is not empty %}
-  <h2>Programmations de ce circuit</h2>
+  {% if admin %}
+	  <h2>Programmations de ce circuit</h2>
   {# <pre>{{ dump(circuit) }}</pre> #}
      	<table>
      	 		<thead>
@@ -58,7 +60,26 @@
      			</tr>
      		{% endfor %}
      		</table>
-    {% else %}
+	  {% else %}
+  {% set nb=0 %}
+
+          {% set reserver = false %}
+  {%  for programmation in circuit.programmations %}
+		{%set  nb =nb+ programmation.nombrePersonnes %}
+
+	  {% if programmation.dateDepart|date('Ymd') >= "now"|date('Ymd') %}
+		  {% set reserver = true %}
+	{% endif %}
+
+  {% endfor %}
+
+	  <p>Déjà {{ nb }} personnes en profitent</p>
+{% if reserver %}
+	<p>RESERVEZ maintenant pour le prochain depart!</p>
+  {% endif %}
+  {% endif %}
+
+  {% else %}
     <p>Désolé : pas encore de programmations pour ce circuit.</p>
     {% endif %}
 

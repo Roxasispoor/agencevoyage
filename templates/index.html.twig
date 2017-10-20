@@ -6,21 +6,6 @@
 
     <p></p>
     <p class="text-center"><a href="index.php/circuit" class="blink_me">Voir nos offres</a></p>
-    <p><img src="images/emoji.png" height="50" width="50">Le quatrième va vous étonner <img src="images/emoji.png" height="50" width="50"></p>
+    <p>{%block emoticon%}<img src="images/emoji.png" height="50" width="50">{% endblock %}Le quatrième va vous étonner
+        {{ block('emoticon') }}   </p>
 {% endblock %} {# body #}
-<script>
-//Haut, haut, bas, bas, gauche, droite, gauche, droite, B, A
-var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
-n = 0;
-$(document).keydown(function (e) {
-    if (e.keyCode === k[n++]) {
-        if (n === k.length) {
-            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-            n = 0;
-            return false;
-        }
-    }
-    else {
-        n = 0;
-    }
-});</script>
