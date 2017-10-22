@@ -4,10 +4,10 @@
 #}
 
 {% extends "baselayout.html.twig" %}
-
+{% block body %}
 <body>
   <h1>{{ circuit.description }}</h1>
-<img src="{{ circuit.pathImage }}">
+<img src="{{ circuit.pathImage }}" width="200" height="200">
 	<h2>Détails</h2>
 
 			<p>Description: {{ circuit.description }}</p>
@@ -70,3 +70,4 @@
 
 </body>
 </html>
+    {% endblock %}
