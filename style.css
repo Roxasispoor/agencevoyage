@@ -1,18 +1,18 @@
 .blink_me {
-    font-size: xx-large;
-    color: red;
+    font-size: 500%;
+    color: #C6E746;
     -webkit-animation-name: blinker;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 2s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
 
     -moz-animation-name: blinker;
-    -moz-animation-duration: 0.3s;
+    -moz-animation-duration: 0.6s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
 
     animation-name: blinker;
-    animation-duration: 0.3s;
+    animation-duration: 0.6s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
@@ -33,4 +33,20 @@
     0% { opacity: 1.0; }
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
+}
+
+h1 {
+    text-align: center;
+    color: #eea236;
+    font-family: Calibri;
+}
+
+body {
+    background-color: #333333;
+}
+
+.Bandeau {
+    background-color: #212121;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }

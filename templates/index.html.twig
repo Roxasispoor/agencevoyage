@@ -4,8 +4,22 @@
 {% block body %}
     <h1>Meilleure agence du monde</h1>
 
+    <div class="Bandeau row" >
+        {% block imagePresentation%}
+        <div class="ImagePresentation hidden-xs hidden-sm col-md-4 col-lg-2 col-lg-offset-1">
+            <img src="images/paysage.jpg" width="100%" >
+        </div>
+        {% endblock %}
+        <div class="TextPresentation col-xs-12 col-sm-12 col-md-4 col-lg-4 col-lg-offset-1">
+            <p style="text-align: justify">La meilleure agence de voyage au monde ! Découvrez les plus belles destinations, les plus grands espace
+                et les meilleurs petits plats de nems, le tout dans le plus pur esprit des Internets XD</p>
+                <p style="text-align: justify   ">Découvrez le plus beau qu'il y ait à voir, comme vous ne l'avez jamais vu ! (malgré #34)</p>
+        </div>
+        {{ block('imagePresentation') }}
+    </div>
+
     <p></p>
-    <p class="text-center"><a href="index.php/circuit" class="blink_me">Voir nos offres</a></p>
-    <p>{%block emoticon%}<img src="images/emoji.png" height="50" width="50">{% endblock %}Le quatrième va vous étonner
+    <p class="text-center"><a href="index.php/circuit" class="blink_me">--> Voir nos offres <--</a></p>
+    <p style="text-align: center">{%block emoticon%}<img src="images/emoji.png" height="50" width="50">{% endblock %}Le quatrième va vous étonner
         {{ block('emoticon') }}   </p>
 {% endblock %} {# body #}

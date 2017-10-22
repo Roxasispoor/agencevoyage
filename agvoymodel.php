@@ -18,7 +18,7 @@ $circuitAndalousie->setPaysDepart('Espagne');
 $circuitAndalousie->addEtape('Grenade',1);
 $circuitAndalousie->addEtape('Cordoue',2);
 $circuitAndalousie->addEtape('Seville',1);
-$circuitAndalousie->setPathImage("/images/espagne.png");
+$circuitAndalousie->setPathImage("images/espagne.png");
 $list_of_circuits[] = $circuitAndalousie;
 
 $circuitVietnam = new Circuit();
