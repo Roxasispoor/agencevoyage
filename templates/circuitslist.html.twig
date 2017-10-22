@@ -10,8 +10,21 @@
         <ul>
         {# Loop through list and creeate the list of circuit items. #}
         {% for circuit in circuitslist %}
-            <li>
+            {%  set counter=0 %}
+            {% for program in circuit.programmations  %}
+
+            {% if program.dateDepart|date('Ymd') >= "now"|date('Ymd') %}
+            {% set counter= counter + 1 %}
+            {% endif %}
+            {% endfor %}
+                <li>
+
                 <a href="{{ path('circuitshowuser', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
+                 {% if counter == 0  %}
+                    [Actuellement indisponible]
+                    {% else %}
+                    [{{ counter }} dates disponibles!]
+                    {% endif %}
             </li>
         {% endfor %}
         </ul>
