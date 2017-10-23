@@ -1,14 +1,21 @@
 {
-	"require" : {
-		"silex/silex" : "^2.0",
-		"twig/twig" : "^1.33",
-		"symfony/assetic-bundle": "^2.8",
-		"twbs/bootstrap": "^3.3"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Model\\" : "model"
-		}
-	},
-	"name" : "Appli agence de voyage TP4"
+    "require" : {
+	"silex/silex" : "^2.0",
+	"twig/twig" : "^1.33",
+	"symfony/form" : "^2.",
+	"symfony/security-csrf" : "^2.",
+	"symfony/twig-bridge" : "^3.3",
+	"symfony/config" : "^2.",
+	"twbs/bootstrap" : "^3.3",
+        "components/jquery" : "^3.2",
+	"symfony/translation" : "^2.",
+	"doctrine/dbal" : "~2.2",
+        "symfony/asset": "^3.3"
+    },
+    "autoload" : {
+	"psr-4" : {
+	    "Model\\" : "model"
+	}
+    },
+    "name" : "Appli agence de voyage TP6"
 }

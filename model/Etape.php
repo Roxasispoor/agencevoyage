@@ -1,51 +1,46 @@
 <?php
 /**
- * Model\Etape.php 
+ * model\Etape.php 
  *
  * @copyright  2015-2017 Telecom SudParis
  * @license    "MIT/X" License - cf. LICENSE file at project root
  */
-
 namespace Model;
 
 /**
  * Classe "Étape de circuit" du Modèle
  *
- * Entité du Modèle qui gère les étapes des circuits pouvant être (ou ayant pu être) organisés par l'agence de voyage
+ * Entité du Modèle qui gère les étapes des circuits pouvant être (ou ayant pu être) organisés
+ * par l'agence de voyage
  */
 class Etape
 {
-
-  // stores the number of instances created (to generate next object id)
-  protected static $instances = 0;
+    // stores the number of instances created (to generate next object id)
+    protected static $instances = 0;
 
     /**
      * @var int
-     *
      */
     private $_id;
 
     /**
-     * @var int numéro de l'étape dans son circuit
-     *
+     * @var int Numéro de l'étape dans son circuit
      */
     private $numeroEtape;
 
     /**
      * @var string
-     *
      */
     private $villeEtape;
 
     /**
-     * @var int durée de l'étape dans cette ville
-     *
+     * @var int Durée de l'étape dans cette ville
      */
     private $nombreJours;
 
     /**
      * Circuit de l'étape
-     * 
+     *
      * @var \Model\Circuit
      */
     protected $circuit;
@@ -70,7 +65,7 @@ class Etape
     public function setNumeroEtape($numeroEtape)
     {
         $this->numeroEtape = $numeroEtape;
-
+        
         return $this;
     }
 
@@ -94,7 +89,7 @@ class Etape
     public function setVilleEtape($villeEtape)
     {
         $this->villeEtape = $villeEtape;
-
+        
         return $this;
     }
 
@@ -118,7 +113,7 @@ class Etape
     public function setNombreJours($nombreJours)
     {
         $this->nombreJours = $nombreJours;
-
+        
         return $this;
     }
 
@@ -133,21 +128,31 @@ class Etape
     }
 
     /**
-     * Constructor
+     * Constructeur
+     *
+     * @var int $numeroEtape
+     * @var string $villeEtape
+     * @var int $nombreJours
+     * @var \Model\Circuit $circuitAssocie
+     * @var int $id (null par defaut)
      */
-    public function __construct()
+    public function __construct($numeroEtape, $villeEtape, $nombreJours, $circuitAssocie, $id = null)
     {
-    	// Generate ID from number of instances (safe if no decrement at destruction)
-    	$this->_id = ++self::$instances;
+        ++ self::$instances;
+        if ($id) 
+        {
+            $this->_id = $id;
+        } 
+        else 
+       {
+            $this->_id = self::$instances;
+        }
+        
+        $this->numeroEtape = $numeroEtape;
+        $this->villeEtape = $villeEtape;
+        $this->nombreJours = $nombreJours;
+        $this->circuit = $circuitAssocie;
     }
-
-//     // handle restoration from the session
-//     public function __wakeup()
-//     {
-//      	if($this->_id > self::$instances) {
-//         	self::$instances = $this->_id;
-//       	}
-//     }
 
     /**
      * Set circuit
@@ -159,7 +164,7 @@ class Etape
     public function setCircuit(\Model\Circuit $circuit = null)
     {
         $this->circuit = $circuit;
-
+        
         return $this;
     }
 

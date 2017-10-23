@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Model\ProgrammationCircuit.php
+ * model\ProgrammationCircuit.php
  *
  * @copyright  2015-2017 Telecom SudParis
  * @license    "MIT/X" License - cf. LICENSE file at project root
@@ -14,67 +13,75 @@ use DateTime;
 /**
  * Classe "Programmation d'un Circuit" du Modèle
  *
- * Entité du Modèle qui gère les programmations de circuits faites (ou ayant été faites) par l'agence de voyage
+ * Entité du Modèle qui gère les programmations de circuits faites (ou ayant été faites) par 
+ * l'agence de voyage
  */
 class ProgrammationCircuit
 {
-	// stores the number of instances created (to generate next object id)
-	private static $instances = 0;
+    // stores the number of instances created (to generate next object id)
+    private static $instances = 0;
 
-	/** var int
-	 * 
-	 */
+    /**
+     * var int
+     */
+    private $_id;
 
-	private $_id;
-
-	/**
+    /**
      * @var \DateTime
-     *
      */
     private $dateDepart;
 
     /**
      * @var int
-     *
      */
     private $nombrePersonnes;
 
     /**
      * @var int
-     *
      */
     private $prix;
 
     /**
      * Circuit de cette programmation
-     * 
+     *
      * @var \Model\Circuit
      */
     protected $circuit;
-    
-	/** 
-	 * Constructeur
-	 * 
-	 * @var string $date
-	 * @var int $nbPersonnes
-	 * @var int $price
-	 * @var Model\Circuit $circuitAssocie
-	 */
-    public function __construct($date, $nbPersonnes, $price, $circuitAssocie, $id=null) {
-    	++self::$instances;
-    	if($id) {
-    		$this->_id = $id;
-    	}
-    	else {
-    		$this->_id = self::$instances;
-    	}
-    	
-    	$this->dateDepart = new DateTime($date);
-    	$this->nombrePersonnes = $nbPersonnes;
-    	$this->prix = $price;
-    	$this->circuit = $circuitAssocie;
-    	//$this->circuit->addProgrammation($this);
+
+    /**
+     * Constructeur
+     *
+     * @var string $date
+     * @var int $nbPersonnes
+     * @var int $price
+     * @var \Model\Circuit $circuitAssocie
+     * @var int $id (null par défaut)
+     */
+    public function __construct($date, $nbPersonnes, $price, $circuitAssocie, $id = null)
+    {
+        ++ self::$instances;
+        if ($id) 
+        {
+            $this->_id = $id;
+        }
+        else 
+       {
+            $this->_id = self::$instances;
+        }
+
+        try {
+            $this->dateDepart = new DateTime($date);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            exit(1);
+        }
+
+         $this->dateDepart = new DateTime($date);
+        $this->nombrePersonnes = $nbPersonnes;
+        $this->prix = $price;
+        $this->circuit = $circuitAssocie;
     }
+
     /**
      * Get id
      *
@@ -82,31 +89,31 @@ class ProgrammationCircuit
      */
     public function getId()
     {
-    	return $this->_id;
+        return $this->_id;
     }
 
     /**
      * Set dateDepart
      *
-     * @param \DateTime $dateDepart
+     * @param string $dateDepart
      *
      * @return ProgrammationCircuit
      */
     public function setDateDepart($dateDepart)
     {
-        $this->dateDepart = $dateDepart;
-
+        $this->dateDepart = new DateTime($dateDepart);
+        
         return $this;
     }
 
     /**
      * Get dateDepart
      *
-     * @return \DateTime
+     * @return string
      */
     public function getDateDepart()
     {
-        return $this->dateDepart;
+        return $this->dateDepart->format("Y-m-d");
     }
 
     /**
@@ -119,7 +126,7 @@ class ProgrammationCircuit
     public function setNombrePersonnes($nombrePersonnes)
     {
         $this->nombrePersonnes = $nombrePersonnes;
-
+        
         return $this;
     }
 
@@ -143,7 +150,7 @@ class ProgrammationCircuit
     public function setPrix($prix)
     {
         $this->prix = $prix;
-
+        
         return $this;
     }
 
@@ -167,7 +174,7 @@ class ProgrammationCircuit
     public function setCircuit(\Model\Circuit $circuit = null)
     {
         $this->circuit = $circuit;
-
+        
         return $this;
     }
 
