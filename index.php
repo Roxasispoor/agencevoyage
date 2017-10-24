@@ -1,95 +1,41 @@
 <?php
 
 /**
- * Application d'exemple Agence de voyages Silex
+ * Point d'entrée de l'application agence de voyages Silex
+ * 
+ * @copyright  2015-2017 Telecom SudParis
+ * @license    "MIT/X" License - cf. LICENSE file at project root
  */
 
+// Initialisations de l'autoloader et des bibliothèques composer
 // require_once __DIR__.'/vendor/autoload.php';
+// variante autorisant le déport de vendor via variable d'env. COMPOSER_VENDOR_DIR
 $vendor_directory = getenv ( 'COMPOSER_VENDOR_DIR' );
 if ($vendor_directory === false) {
-	$vendor_directory = __DIR__ . '/vendor';
+  $vendor_directory = __DIR__ . '/vendor';
 }
 require_once $vendor_directory . '/autoload.php';
 
-// Initialisations
+// Initialisations du framework Silex
 $app = require_once 'initapp.php';
 
+// Chargement du gestionnaire de la persistence du modèle dans la base de données
 require_once 'agvoymodel.php';
 
-// Routage et actions
 
+// Gestion de la page d'accueil
 
-// circuitlist : Liste tous les circuits
-$app->get ( '/circuit',
+$app->get('/', 
     function () use ($app) 
     {
-    	$circuitslist = get_all_circuits ();
-    	// print_r($circuitslist);
-    	
-    	return $app ['twig']->render ( 'circuitslist.html.twig', [
-    			'circuitslist' => $circuitslist,
-                'admin'=>false
-    	] );
+        return $app['twig']->render('index.html.twig');
     }
-)->bind ( 'circuitlistuser' );
+)->bind('home');
 
-// circuitshow : affiche les détails d'un circuit
-$app->get ( '/circuit/{id}', 
-	function ($id) use ($app) 
-	{
-		$circuit = get_circuit_by_id ( $id );
-		// print_r($circuit);
-		$programmations = get_programmations_by_circuit_id ( $id );
-		//$circuit ['programmations'] = $programmations;
+// chargement des gestionnaires pour le front office
+require_once 'frontoffice.php';
+// chargement des gestionnaires pour le back office
+require_once 'backoffice.php';
 
-		return $app ['twig']->render ( 'circuitshow.html.twig', [ 
-				'id' => $id,
-				'circuit' => $circuit,
-                'admin'=>false
-			]);
-	}
-)->bind ( 'circuitshowuser' );
-
-$app->get ( '/admin/circuit/{id}',
-    function ($id) use ($app)
-    {
-        $circuit = get_circuit_by_id ( $id );
-        // print_r($circuit);
-        $programmations = get_programmations_by_circuit_id ( $id );
-        //$circuit ['programmations'] = $programmations;
-
-        return $app ['twig']->render ( 'circuitshow.html.twig', [
-            'id' => $id,
-            'circuit' => $circuit,
-            'admin'=>true
-        ]);
-    }
-)->bind ( 'circuitshowadmin' );
-
-
-//Route standard
-$app->get ( '/',
-function() use ($app)
-               {
-               	return $app ['twig']->render ( 'index.html.twig' );
-               }
-           )->bind ('baselayout');
-// programmationlist : liste tous les circuits programmés
-
-$app->get ( '/admin/programmation',
-
-    function () use ($app)
-    {
-        $programmationslist = get_all_programmations ();
-        // print_r($programmationslist);
-
-        return $app ['twig']->render ( 'programmationslist.html.twig', [
-            'programmationslist' => $programmationslist
-        ] );
-    }
-
-)->bind ( 'programmationlistadmin' );
-
+// Appel du framework
 $app->run ();
-
-

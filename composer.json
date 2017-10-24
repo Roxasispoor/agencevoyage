@@ -2,13 +2,13 @@
     "require" : {
 	"silex/silex" : "^2.0",
 	"twig/twig" : "^1.33",
-	"symfony/form" : "^2.",
+	"symfony/form" : "^3.3",
 	"symfony/security-csrf" : "^2.",
 	"symfony/twig-bridge" : "^3.3",
-	"symfony/config" : "^2.",
+	"symfony/config" : "^3.3",
 	"twbs/bootstrap" : "^3.3",
         "components/jquery" : "^3.2",
-	"symfony/translation" : "^2.",
+	"symfony/translation" : "^3.3",
 	"doctrine/dbal" : "~2.2",
         "symfony/asset": "^3.3"
     },

@@ -96,6 +96,18 @@ class ExprBuilder
     }
 
     /**
+     * Tests if the value is empty.
+     *
+     * @return ExprBuilder
+     */
+    public function ifEmpty()
+    {
+        $this->ifPart = function ($v) { return empty($v); };
+
+        return $this;
+    }
+
+    /**
      * Tests if the value is an array.
      *
      * @return $this
@@ -131,6 +143,19 @@ class ExprBuilder
     public function ifNotInArray(array $array)
     {
         $this->ifPart = function ($v) use ($array) { return !in_array($v, $array, true); };
+
+        return $this;
+    }
+
+    /**
+     * Transforms variables of any type into an array.
+     *
+     * @return $this
+     */
+    public function castToArray()
+    {
+        $this->ifPart = function ($v) { return !is_array($v); };
+        $this->thenPart = function ($v) { return array($v); };
 
         return $this;
     }
